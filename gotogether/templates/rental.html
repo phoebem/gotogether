@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+{% include "event_banner.html" %}
+
+
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+{% if event.creator == user.id %}
+<input type="submit" value="Submit" />
+{% endif %}
+</form>
+
+</div>
+{% endblock %}
+

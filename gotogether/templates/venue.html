@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+{% include "event_banner.html" %}
+
+<h2> <a href="{{ venue.url }}"  target="_blank"> {{ venue.name }}</a>
+</h2>
+{% if event.creator.id == user.id %}
+<input type="button" value="Book This">
+{% endif %}
+<table>
+<tr><td>
+<img src="{{ venue.imageURL }}" width="400">
+<td align="right">
+{{ venue.description }}
+<tr>
+<td>
+{{ venue.location }}
+<td>
+west side of NH Rt.16, about six miles south of Conway.
+</table>
+
+{% endblock %}

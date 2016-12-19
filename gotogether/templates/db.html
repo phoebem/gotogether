@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+
+
+<h2>Events</h2>
+<ul>
+{% for event in events %}
+    <li>{{ event.name }}</li>
+{% endfor %}
+</ul>
+
+<h2>Profiles</h2>
+<ul>
+{% for profile in profiles %}
+    <li>{{ profile.name }}</li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}

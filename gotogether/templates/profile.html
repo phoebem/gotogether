@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{%  url 'user' user.id as the_url %}
+{% block content %}
+<div class="container">
+{% include "profile_banner.html" %}
+
+
+This profile is used in these events:
+<ul>
+{% for event in events %}
+<li> {{ event }}</li>
+{% endfor %}
+</ul>
+Personal preferences:
+<table>
+<tr>
+<td><B>Activities:</B>
+<td>
+{% for act in activity %}
+    {{ act }},
+{% endfor %}
+<tr><td><B>Food:</B>
+<td>
+{% for food in foods %}
+    {{ food }},
+{% endfor %}
+<tr><td><B>Locations:</B>
+<td>{% for loc in locations %}
+    {{ loc }},
+{% endfor %}
+<tr><td> <b>Accommodations:</B>
+        <td>
+{% for loc in accommodation %}
+    {{ loc }},
+{% endfor %}
+<tr><td><B>Contacts:</B>
+<td>
+{% if contacts %}
+{% include 'contacts_table.html' %}
+{% endif %}
+</table>
+</div>
+
+{% endblock %}
+

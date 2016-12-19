@@ -1,0 +1,8 @@
+{
+  "name": "Gotogether",
+  "description": "A travel app prototype",
+  "image": "heroku/python",
+  "repository": "https://github.com/phoebe/gotogether",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}

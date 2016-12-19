@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container" width="80%">
+
+<link rel="stylesheet" href="{% static 'contrib/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'contrib/font-awesome.min.css' %}">
+<script src="{% static 'contrib/bootstrap.js' %}"></script>
+
+<ol class="breadcrumb crumbs">
+{%  url 'user' user.id as the_url %}
+<li> <a href="{{the_url}}">Home</a> </li>
+<li class="active">New Event</li>
+</ol>
+
+<nav class="eventbanner navbar navbar-default"><!-- navbar-inverse -->
+<div class="container">
+    <ul class="nav navbar-nav"> 
+        <li class="active"> <a href="#" class="btn-lg active" role="button"> Summary</a></li>
+            {%  url 'camping' user.id event.id event.camping.id as the_url %}
+        <li class="disabled"> <a href="{{the_url}}" class="btn-lg" role="button"> Accommodation </a> </li>
+            {%  url 'activity' user.id event.id event.activities.id as the_url %}
+        <li class="disabled"> <a href="{{the_url}}" class="btn-lg" role="button"> Interests </a> </li>
+            {%  url 'contacts' user.id as the_url %}
+            <li class="disabled"> <a href="{{the_url}}" class="btn-lg" role="button"> Contacts </a> </li>
+            {%  url 'booking' user.id event.id event.booking.id as the_url %}
+            <li class="disabled"> <a href="{{the_url}}" class="btn-lg" role="button"> Booking </a> </li>
+            {%  url 'rsvp' user.id event.id event.rsvp.id as the_url %}
+            <li class="disabled"> <a href="{{the_url}}" class="btn-lg" role="button"> RSVP </a> </li>
+   </ul>
+</div>
+</nav>
+
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+
+<form class="addbutton" action="" method="post">
+    <label>Location:</label> Within 
+<input type="text" value="" size="5" />miles of
+<input type="text" size="50" placeholder="Address or City,State,Zip" name="location"/>
+<input type="image" src="/static/plus.png" width="20px" value="Submit" />
+</form>
+
+<br>
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
+</div>

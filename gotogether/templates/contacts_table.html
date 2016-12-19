@@ -1,0 +1,20 @@
+<table border="1" width="100%">
+<th> Name
+<th> Email
+<th> Phone number
+<th> Notes
+{% for user in contacts %}
+<tr>
+<td>
+    {%  url 'user' user.id as the_url %}
+    <a href="{{ the_url }}">{{ user.firstname }}
+        {{ user.lastname }}
+    </a>
+<td>
+        {{ user.email }}
+<td>
+        {{ user.phone }}
+<td>
+</tr>
+{% endfor %}
+</table>

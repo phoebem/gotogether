@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+{% include "event_banner.html" %}
+<table width="100%">
+<tr width="10%"> <td> <label> Date: </label>
+<td> {{ event.start |date:"SHORT_DATE_FORMAT" }} 
+to {{ event.end |date:"SHORT_DATE_FORMAT" }} 
+</tr>
+<tr> <td> <label> Location: </label>
+        <td colspan=2>
+            {%for location in locations %}
+            {{ location }}
+            {% endfor %}
+        </tr>
+<tr> <td> <label> Description: </label>
+<td> {{ event.description }} </tr>
+<tr> <td> <label> Interests: </label>
+<td>
+ {% for activity, c in activities.items %}
+    {{activity}} ({{c}})
+    {% endfor %}
+</tr>
+<tr> <td> <label> Food: </label>
+<td> 
+    {% for food, c in foods.items %}
+    {{food}}({{ c }})
+    {%endfor%}
+<tr>
+<td align="top" colspan=2>
+<label>
+Confirmed Participants
+</label>
+
+<br>
+    <table width="100%" border="1" style="overflow:scroll;">
+    <th>Name
+    <th>Email
+    <th>Number of participants
+    {% for rsv in rsvp %}
+    <tr>
+    <td>
+        {{ rsv.person.firstname}}
+    <td>
+        {{ rsv.person.email}}
+    <td>
+        {{rsv.number_of_guests}}
+    </tr>
+    {% endfor %}
+    </table>
+    Confirmed: {{ total }}
+
+{% if needreply == True %}
+<td width="200px"> <input type="checkbox"> I am going as <input type="text" size="2">people
+    (incl me)
+<br>
+    <input type="button" value="Send my reply">
+{% else  %}
+<td width="200px">
+    <input type="checkbox"> Delete my entry
+<br>
+    <input type="checkbox"> I am no longer going
+<br>
+    <input type="button" value="Change my reply">
+{% endif  %}
+</table>
+<br>
+
+<label for="chat">Chat area</label>
+<span style="width:50%">
+<input style="margin-left: 350px ; margin-right: 0px;  width:20% " name="search" type="text" placeholder="search text">
+<span>
+<br>
+{% if event.id == 1 %}
+<textarea name="chat" rows="10" cols="86">
+    Nov 20, 2016
+Josh:   I like 34 trails campground, it has a nice beach area. Has anyone been there before.
+Leah:   Not I. It's a bit far, but it has a dock according to the website, we can bring canoes
+Phoebe: It sounds very touristy. I am leaning towards White ledge, the hikes are great around there.
+Leah:   It also has good rockclimbing and shouldn't be too crowded.
+    Nov 21, 2016
+Josh:   34 trails has a brewery close by, we can eat out instead of cooking one of the meals.
+Alicia: We should do that on the last day.
+</textarea>
+{% else %}
+<textarea name="chat" rows="10" cols="86">
+    Dec 10, 2016
+Josh:   Looking forward to it all year
+Cary:   I will get the Champagne
+Alicia:   I will do a food run on the 28th
+</textarea>
+{% endif %}
+<br>
+<input type="button" value="Send" >
+<input type="text" size="80" >
+</div>
+
+</div>
+
+{% endblock %}

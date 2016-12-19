@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+
+{%  url 'event' user.id event.id as the_url %}
+{%  url 'activity' user.id event.id as the_url %}
+{%  url 'accommodation' user.id event.id as the_url %}
+
+<h2>Events
+    {%  url 'newevent' user.id 0  as the_url %}
+    <a href="{{ the_url }}"> <img src="/static/plus.png" width="20"></a>
+</h2>
+<ul>
+{% for event in events %}
+    {%  url 'event' user.id event.id as the_url %}
+    <li> <a href="{{ the_url }}">{{ event.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>Profiles <img src="/static/plus.png" width="20">
+</h2>
+<ul>
+{% for profile in profiles %}
+    {%  url 'profile' user.id profile.id as the_url %}
+    <li> <a href="{{ the_url }}">{{ profile.name }}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}

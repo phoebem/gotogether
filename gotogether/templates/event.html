@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+{% include "event_banner.html" %}
+
+<table width="100%">
+<tr width="10%"> <td> <label> Date: </label>
+<td> {{ event.start |date:"SHORT_DATE_FORMAT" }} 
+to  {{ event.end |date:"SHORT_DATE_FORMAT" }} 
+( {{  event.number_of_days }} days )
+</tr>
+<tr> <td> <label> Location: </label>
+</td>
+<td> {% for location in locations %}
+    {{location}}
+{% endfor %}
+<form class="addbutton"  action="" method="post">
+{% csrf_token %}
+<!--
+Within <input type="text" size="5"> miles of
+<input type="text" size="40" placeholder="Address or city,State,zip">
+<input type="submit" src="/static/plus.png" width="20px" alt="Add" value="Submit" />
+-->
+</form>
+</td> </tr>
+
+<tr> <td> <label> Description: </label> </td>
+<td> {{ event.description }}
+</td> </tr>
+<tr> <td> <label> Interests: </label></td>
+<td> {% for activity, c in activities.items %}
+    {{activity}} ({{c}})
+    {% endfor %}
+</td>
+</tr>
+<tr> <td> <label> Food: </label>
+<td>
+    {% for food, c in foods.items %}
+    {{food}}({{ c }})
+    {%endfor%}
+<tr>
+<td align="top">
+<label>
+Participants
+<!--img width="20" src= "/static/plus.png" -->
+</label>
+<td>
+    <table width="80%" border="1" style="overflow:scroll;">
+    <th>Name
+    <th>Email
+    <th>Number of guests
+    <th>Reply
+    {% for rsv in rsvp %}
+    <tr>
+    <td>
+        {{ rsv.person.firstname}}
+    <td>
+        {{ rsv.person.email}}
+    <td>
+        {{rsv.number_of_guests}}
+    <td>
+        {{ rsv.reply}}
+    </tr>
+    {% endfor %}
+        <td>
+    </table>
+</table>
+
+<h2>Profile
+<input type="image" src="/static/plus.png" width="20px" alt="Add" value="Submit" />
+</h2>
+<table width="80%" style="overflow:scroll;">
+{% for profile in profiles %}
+<tr>
+    <td>
+        {%  url 'profile' user.id profile.profile.id  as the_url %}
+        <a href="{{the_url}}">{{ profile.profile.name }}</a>
+    </td>
+{% endfor %}
+</table>
+</div>
+
+{% endblock %}

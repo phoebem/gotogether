@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gotogether - A place to plan adventures together</title>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body {
+        background: #bbb;
+    }
+
+    /*
+input[type="checkbox"] {
+  display: block;
+  margin: 0;
+  list-style: block;
+  class: checkbox;
+}
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 50%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+*/
+input[type="text"]:focus {
+  outline: none;
+}
+.style-1 input[type="text"] {
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+.style-1 input[type="text"]:focus,
+.style-1 input[type="text"].focus {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+}
+
+.addbutton input[type=submit] {
+     background:url("/static/plus.png") no-repeat;
+     background-size: cover;
+     cursor:pointer;
+     width: 20px;
+     height:20px;
+     border: none;
+     color: transparent;
+}
+
+    .attrform input {
+        width: 50%;
+    }
+    .jumbotron {
+        background: #bbbbbb;
+        color: #2F4F2F;
+        padding-bottom: 80px
+    }
+    .jumbotron .btn-primary {
+        background: #845ac7;
+       border-color: #845ac7
+        color: #2F4F2F;
+    }
+    .jumbotron .btn-primary:hover {
+        background: #7646c1
+    }
+    .jumbotron p {
+        //color: #d9ccee;
+        max-width: 75%;
+        //margin: 1em auto 2em
+        color: #2F4F2F;
+    }
+    .navbar+.jumbotron {
+        margin-top: -20px
+    }
+    .jumbotron .lang-logo {
+        display: block;
+        background: #b01302;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        border: 2px solid white
+        color: #2F4F2F;
+    }
+    .jumbotron .lang-logo img {
+        max-width: 100%
+    }
+
+    .banner {
+        color: #426F42;
+        background: #9ACD32;
+        //background: #A2CD5A;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #444;
+    }
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #426F42;
+}
+
+.navbar-default .navbar-nav > .inactive > a, 
+    background-color: #cACD32;
+}
+.navbar-default .navbar-nav > .active > a, 
+    background-color: #9ACD32;
+}
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #222;
+    background-color: #07E7E7;
+    //background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #333;
+    background-color: #D5D5D5;
+}
+
+    .crumbs {
+        background: #bbb;
+        color: #111111;
+    }
+
+    .eventbanner {
+        background: #bbb;
+        color: #111111;
+        border: 1px solid #111111;
+    }
+
+    .eventbanner .disabled {
+        background: #bbb;
+        color: #777777;
+        border: 0px
+    }
+
+    .far-right {
+        float: right;
+    }
+  </style>
+</head>
+<body>
+<nav class="banner navbar navbar-default navbar-static-top navbar-inverse">
+  <div class="container">
+      <ul class="nav navbar-nav"> 
+        <h1> GoTogether </h1>
+    </ul>
+    {% if not starting %}
+    <span class="far-right">
+        Hello {{ user.firstname }}
+    <span>
+        <br>
+    <a href="/">Log off</a>
+    {% endif %}
+  </div>
+</nav>
+
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+{% include "event_banner.html" %}
+{% if booking.count == 0 %}
+<img src="/static/map.png" style="width:600px; float:center; margin: 0 auto">
+<p>
+Best options listed by relevance
+<label for="ttt" style="float:right">
+<input name=ttt type="checkbox" checked="true" style="float:right">
+Ask invitees to vote on it</label>
+<table border="1" style="float:right; width:100%">
+<th>Vote
+<th>Remove
+<th>#Votes
+<th>Name(category)
+<th>Address
+<th>Distance
+<th>Amenities
+{% for venue in venues %}
+<tr>
+<td> <input type="checkbox">
+<td> <input type="checkbox">
+<td> {{ venue.votes }}
+{% url 'venue' user.id event.id venue.id as the_url %}
+<td> <a href="{{ the_url }}">{{venue.name}}</a>
+{{venue.accommodation_type}}
+<!--
+<button style="float:right" onclick="window.location.href='{{ the_url }}'">Pick</button>
+-->
+<td> {{ venue.location }}
+<td> {{ venue.distance }}
+<td> {{ venue.ammenities }}
+{% endfor %}
+</table>
+{% endif %}
+
+{% for venue in booking %}
+<h2>
+{{ venue.name }} 
+</h2>
+<img src="{{ venue.imageURL }}">
+{{ venue.description }}
+<p>
+{{ venue.location }}
+<A href="Map">Map and Directions</a>
+</p>
+{% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+{% if event %}
+{% include "event_banner.html" %}
+{% else %}
+{% include "profile_banner.html" %}
+{% endif %}
+
+<table width="80%">
+{% if event %}
+<th>Invite</th>
+{% endif %}
+<th> First Name
+<th> Last Name
+<th> Email
+<th> Phone number
+<th> Notes
+{% for user in contacts %}
+{%  url 'user' user.id as the_url %}
+<tr>
+{% if event %}
+<td>
+    <input type="checkbox" checked="true">
+{% endif %}
+<td>
+    <a href="{{ the_url }}">{{ user.firstname }}
+    </a>
+<td>
+        {{ user.lastname }}
+<td>
+        {{ user.email }}
+<td>
+        {{ user.phone }}
+<td>
+<td>
+{% endfor %}
+<tr>
+    <td>
+    <td><input type="text">
+    <td><input type="text">
+    <td><input type="text">
+    <td><input type="text">
+    <td><input type="text">
+<td>
+            <img src="/static/plus.png" width="20">
+</table>
+
+</div>
+{% endblock %}
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script type="text/javascript">
+function jqsub() {
+var $f = $('#contact_form');
+var $m = $('#message');
+$.ajax({
+type: 'POST',
+url: $f.attr('action'),
+data: $f.serialize(),
+success: function(msg) {
+var formResponse = eval(msg); // This line evaluates the JSON data and converts it to JSON object. In older version of jQuery you will have to evaluate JSON object as a string.
+if (formResponse.FormProcessV2Response.success) { 
+$m.addClass('success').fadeIn().html(formResponse.FormProcessV2Response.message); 
+$f.fadeOut(); //Hide the form
+}
+
+},
+error: function(msg) {
+alert('error'+msg);
+return false;
+}
+});
+}
+{% block javascript %}{% endblock %}

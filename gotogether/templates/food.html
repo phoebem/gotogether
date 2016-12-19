@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+
+<ol class="breadcrumb crumbs">
+{%  url 'user' user.id as the_url %}
+<li> <a href="{{the_url}}">Home</a> </li>
+{%  url 'profile' user.id profile.id as the_url %}
+<li> <a href="{{the_url}}">{{ profile.name}} profile</a> </li>
+<li class="active">Interests</li>
+</ol>
+
+<nav class="eventbanner navbar navbar-default"><!-- navbar-inverse -->
+<div class="container">
+    <ul class="nav navbar-nav"> 
+        {%  url 'profile' user.id profile.id as the_url %}
+        <li> <a href="{{the_url}}" class="btn-lg active" role="button"> Summary</a></li>
+            {%  url 'pcamping' user.id profile.id profile.camping.id  as the_url %}
+        <li> <a href="{{the_url}}" class="btn-lg" role="button"> Accommodation </a> </li>
+            {%  url 'pactivity' user.id profile.id profile.activities.id as the_url %}
+        <li> <a href="{{the_url}}" class="btn-lg" role="button"> Interests </a> </li>
+            {%  url 'pfood' user.id profile.id profile.food.id  as the_url %}
+            <li class="active"> <a href="{{the_url}}" class="btn-lg" role="button"> Food </a> </li>
+            {%  url 'location' user.id profile.id as the_url %}
+            <li> <a href="{{the_url}}" class="btn-lg" role="button"> Location </a></li>
+            {%  url 'contacts' user.id as the_url %}
+            <li> <a href="{{the_url}}" class="btn-lg" role="button"> Contacts </a> </li>
+   </ul>
+</div>
+</nav>
+
+<h2>{{ profile.name }}</h2>
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+{% if event.creator.id == user.id %}
+<input type="submit" value="Submit" />
+{% endif %}
+</form>
+
+</div>
+{% endblock %}
+
